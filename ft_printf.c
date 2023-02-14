@@ -1,73 +1,52 @@
-# include "printf.h"
-# include <stdarg.h>
-# include <unistd.h>
+#include "ft_printf.h"
+#include <stdio.h>
 
-
-int	ft_print_c(int c)
+int ft_get_format(char format, va_list args)
 {
-	write(1, &c, 1);
-	return (1);
-}
+    int result;
 
-char ft_print_str(char *str)
-{
-    size_t  i;
-
-    if (str == 0)
-    {
-        write(1, "(null)", 6);
-        return (6);
-    }
-    while(str[i])
-    {
-        write(1, &str[i], 1);
-        i++;
-    }
-    return (i);
-}
-
-static int  ft_get_format(char format, va_list args)
-{
+    result = 0;
     if (format == 'c')
-        return (ft_print_c(va_arg(args, int)));
+        result += ft_printf_c(va_arg(args, int));
     else if (format == 's')
-        return (ft_print_str(va_arg(args, char *)));
-    else if (format == '%')
-        write(1, "%", 1);
+        result += ft_printf_str(va_arg(args, char *));
+    else if (format == 'p')
+		result += ft_printf_ptr(va_arg(args, unsigned long long));
+    else if (format == 'd' || format == 'i')
+        result += ft_printf_int(va_arg(args, int));
+    else if (format == 'u')
+		result += ft_printf_int(va_arg(args, unsigned int));
+	else if (format == 'x' || format == 'X')
+		result += ft_print_hex(va_arg(args, unsigned int), format);
 
-    else
-        return (0);
+    else if (format == '%')
+        result += write(1, "%", 1);
+    return (result);
 }
 
 int ft_printf(const char *str, ...)
 {
-    size_t  i;
-    int res;
+    int i;
+    int output;
     va_list args;
 
-
     i = 0;
-    res = 0;
+    output = 0;
     va_start(args, str);
-    while(str[i])
+    while (str[i])
     {
-        if (str[i] == '%')
-        {
-            res += ft_get_format(str[i+1], args);
-            i++;
-        }
-        else
-            res += write(1, &str[i], 1);
-        i++;
+        if (str[i] == '%'){
+            output += ft_get_format(str[i+1], args);
+            i += 2;
+        }else
+            output += write(1, &str[i++], 1);
     }
     va_end(args);
-    return (res);
+    return (output);
 }
 
-int main()
-{
-    int c = 'x';
-    char *str = " hallo bist du dumm ";
-    ft_printf("%s ey %c", str, c);
-    write(1, "\n", 2);
-}
+// int main(){
+//     ft_printf(" %c ", '0');
+//     printf(" %c ", '0');
+//     write(1, "\n", 1);
+// }
