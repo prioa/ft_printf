@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_ptr.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdubsky <pdubsky@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/15 17:07:57 by pdubsky           #+#    #+#             */
+/*   Updated: 2023/02/15 17:08:08 by pdubsky          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int	ft_ptr_len(uintptr_t n)
@@ -34,7 +46,8 @@ int	ft_printf_ptr(unsigned long long ptr)
 	int	result;
 
 	result = 0;
-	if (ptr == 0){
+	if (ptr == 0)
+	{
 		write(1, "(nil)", 5);
 		return (5);
 	}

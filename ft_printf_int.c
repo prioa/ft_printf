@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_int.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdubsky <pdubsky@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/15 17:07:55 by pdubsky           #+#    #+#             */
+/*   Updated: 2023/02/15 17:08:08 by pdubsky          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int ft_putchar(char c)
+int	ft_putchar(char c)
 {
-    write(1, &c, 1);
-    return (1);
+	write(1, &c, 1);
+	return (1);
 }
 
 void	ft_putnbr(unsigned long long i)
@@ -17,8 +29,7 @@ void	ft_putnbr(unsigned long long i)
 		ft_putchar(i + '0');
 }
 
-
-int ft_printf_int(long long i)
+int	ft_printf_int(long long i)
 {
 	int	counter;
 
