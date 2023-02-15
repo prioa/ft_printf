@@ -45,8 +45,7 @@ int ft_printf(const char *str, ...)
     return (output);
 }
 
-// int main(){
-//     ft_printf(" %c ", '0');
-//     printf(" %c ", '0');
-//     write(1, "\n", 1);
+// int main()
+// {
+// 	ft_printf(" %p %p ", 0, 0);
 // }
